@@ -1,19 +1,22 @@
 # Multi-Loss Approach for Domain Generalization - Loss function optimization
 
+
 ## Overview
-This module combines:
-- Standard classification loss (baseline)
-- Domain-adversarial loss (GRL)
-- Contrastive loss (CL)
+Combines baseline, GRL, and CL:
+- Standard classification loss for deception.
+- Domain-adversarial loss for domain invariance.
+- Contrastive loss for feature alignment.
 
 ## Advantages
-- Jointly encourages:
-  - **Accurate deception prediction**
-  - **Domain-invariant feature learning**
-  - **Robust embedding alignment across domains**
-- Typically achieves the **strongest cross-domain generalization**.
+- Encourages **accurate predictions**, **domain invariance**, and **robust embeddings** simultaneously.
+- Often achieves **best performance under LODO evaluation**.
 - **Introducing focal loss to solve the problem of category imbalance**
+
+## Domain Generalization
+- LODO protocol applied for fair comparison with other methods.
+- Demonstrates **robust cross-domain generalization**.
 
 ## Usage
 - Enable all loss terms in training.
-- Evaluate under the **same LODO protocols** as other methods.
+- Specify source and held-out domains.
+
