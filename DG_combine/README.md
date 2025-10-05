@@ -12,6 +12,7 @@ This module combines:
   - **Domain-invariant feature learning**
   - **Robust embedding alignment across domains**
 - Typically achieves the **strongest cross-domain generalization**.
+- **Introducing focal loss to solve the problem of category imbalance**
 
 ## Usage
 - Enable all loss terms in training.
