@@ -1,4 +1,4 @@
-# audio_DG_GRL method
+# audio_DG_GRL
 
 import pandas as pd
 import numpy as np
@@ -67,9 +67,9 @@ class Spec_Dataset(Dataset):
         self.annos = []
         for i in range(annotations.shape[0]):
 
-            mono_or_interro = annotations.iloc[i,4] # mono, monologue, interrogation
-            ethnicity = annotations.iloc[i,1].split("_")[0] # EA, SEA, SA
-            language = annotations.iloc[i,-1] # chinese, english, English etc. CAUTION !! - language names are case sensitive
+            mono_or_interro = annotations.iloc[i,4] 
+            ethnicity = annotations.iloc[i,1].split("_")[0] 
+            language = annotations.iloc[i,-1] 
 
             if language in ["English","english"]:
                 if ethnicity == "EA" and "CHINESE" in domain: self.annos.append(annotations.iloc[i])
@@ -116,13 +116,11 @@ def af_pad_sequence(batch):
 def af_collate_fn(batch):
     spec_tensors, targets1, targets2 = [], [], []
 
-    # Gather in lists, and encode labels as indices
     for spec, deception_label, domain_label in batch:
         spec_tensors += [spec]
         targets1 += [deception_label]
         targets2 += [domain_label]
 
-    # Group the list of tensors into a batched tensor
     spec_tensors = af_pad_sequence(spec_tensors)
     targets1 = torch.stack(targets1)
     targets2 = torch.stack(targets2)
@@ -153,7 +151,7 @@ def train_one_epoch(train_data_loader, model, optimizer, loss1, loss2, alpha):
 
         _deception_loss = loss1(deception_preds,deception_labels)
         _domain_loss = loss2(domain_preds,domain_labels)
-        _loss = alpha * _deception_loss + (1.0 - alpha) * _domain_loss #####                 <<<<<<<<<<<<<<<<<<<======================
+        _loss = alpha * _deception_loss + (1.0 - alpha) * _domain_loss 
         deception_loss.append(_deception_loss.item())
         domain_loss.append(_domain_loss.item())     
 
