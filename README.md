@@ -13,7 +13,7 @@ The goal of this work is to evaluate how models trained on multiple domains perf
 
 - **LODO (Leave-One-Domain-Out) Principle**:
 - All methods follow the **LODO protocol**:
-1. The dataset is divided into distinct domains, e.g., ethnic or language groups such as:
+1. The dataset is divided into distinct domains, e.g., ethnic or language groups
    - CHINESE
    - MALAY
    - HINDI
@@ -22,11 +22,12 @@ The goal of this work is to evaluate how models trained on multiple domains perf
 
 - ### Example LODO Protocols
 
-| Train Domains         | Test Domain |
-|-----------------------|------------|
-| ["CHINESE", "MALAY"]  | ["HINDI"]  |
-| ["CHINESE", "HINDI"]  | ["MALAY"]  |
-| ["MALAY", "HINDI"]    | ["CHINESE"]|
+- Train = {CHINESE, MALAY} → Test = {HINDI}  
+- Train = {CHINESE, HINDI}  → Test = {MALAY}  
+- Train = {MALAY, HINDI}    → Test = {CHINESE}
+
+Performance reported on the held-out domain reflects the model’s ability to generalize across domain shifts (ethnicities/languages).
+
 
 These protocols simulate real-world scenarios where the model encounters **new, unseen populations**.
 
