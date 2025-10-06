@@ -91,17 +91,16 @@ class audio_model(nn.Module):
 class Spec_Dataset(Dataset):
     def __init__(self, annotations_file, spec_dir, domain):
 
-        # domian is a python list; domain = ["CHINESE", "MALAY", "HINDI"]; choose accordingly!
         annotations = pd.read_csv(annotations_file) # load protocols/all_samples.csv
         self.spec_dir = spec_dir
 
         self.annos = []
         for i in range(annotations.shape[0]):
 
-            mono_or_interro = annotations.iloc[i,4] # mono, monologue, interrogation
-            ethnicity = annotations.iloc[i,1].split("_")[0] # EA, SEA, SA
-            language = annotations.iloc[i,-1] # chinese, english, English etc. CAUTION !! - language names are case sensitive
-
+            mono_or_interro = annotations.iloc[i,4] 
+            ethnicity = annotations.iloc[i,1].split("_")[0] 
+            language = annotations.iloc[i,-1] 
+            
             if language in ["English","english"]:
                 if ethnicity == "EA" and "CHINESE" in domain: self.annos.append(annotations.iloc[i])
                 if ethnicity == "SEA" and "MALAY" in domain: self.annos.append(annotations.iloc[i])
@@ -143,12 +142,10 @@ def af_pad_sequence(batch):
 def af_collate_fn(batch):
     spec_tensors, targets1 = [], []
 
-    # Gather in lists, and encode labels as indices
     for spec, deception_label in batch:
         spec_tensors += [spec]
         targets1 += [deception_label]
 
-    # Group the list of tensors into a batched tensor
     spec_tensors = af_pad_sequence(spec_tensors)
     targets1 = torch.stack(targets1)
 
@@ -178,7 +175,7 @@ def train_one_epoch(train_data_loader, model, optimizer, loss1, focal_loss, nt_x
         # Forward
         deception_preds, contrastive_projections = model(spec)
         
-        # three loss function..
+        # three loss functions
         _deception_loss = loss1(deception_preds, deception_labels)
         _focal_loss_value = focal_loss(deception_preds, deception_labels)
         _nt_xent_loss_value = nt_xent_loss(contrastive_projections, deception_labels)
