@@ -2,8 +2,11 @@
 
 ## Overview
 This repository implements **domain generalization (DG) methods** for deception detection using audio and face modalities. 
+
+
 This is a part of my **Master’s thesis** research at Nanyang Technological University **(NTU)**, Singapore.
 It explores Domain Generalization (DG) techniques to improve the robustness of multimodal deception detection models under cross-domain settings.
+
 
 🎯 Research Objective
 The goal of this work is to evaluate how models trained on multiple domains perform on unseen domains, following the **Leave-One-Domain-Out (LODO)** evaluation protocol.
